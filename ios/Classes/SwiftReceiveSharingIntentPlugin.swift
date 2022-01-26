@@ -3,6 +3,7 @@ import UIKit
 import Photos
 
 public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
+
   static let kMessagesChannel = "receive_sharing_intent/messages";
   static let kEventsChannelMedia = "receive_sharing_intent/events-media";
   static let kEventsChannelLink = "receive_sharing_intent/events-text";
@@ -52,6 +53,7 @@ public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterSt
     }
   }
 
+
   public func hasMatchingSchemePrefix(url: URL?) -> Bool {
     if let url = url {
       return url.absoluteString.hasPrefix(self.customSchemePrefix)
@@ -84,6 +86,7 @@ public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterSt
         }
       }
     }
+
     return true
   }
 
@@ -141,6 +144,7 @@ public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterSt
           }
           eventSinkMedia?(toJson(data: latestMedia))
         }
+
       } else if url.fragment == "file" {
         if let key = url.host?.components(separatedBy: "=").last,
           let json = userDefaults?.object(forKey: key) as? Data {
