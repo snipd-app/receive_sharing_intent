@@ -144,6 +144,7 @@ class ReceiveSharingIntentPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
             Intent.ACTION_SEND -> {
                 val uri = intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
                 val path = uri?.let{ FileDirectory.getAbsolutePath(applicationContext, it) }
+
                 if (path != null) {
                     val type = getMediaType(path)
                     val thumbnail = getThumbnail(path, type)
@@ -205,6 +206,7 @@ class ReceiveSharingIntentPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(path)
         val duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull()
+
         retriever.release()
         return duration
     }
